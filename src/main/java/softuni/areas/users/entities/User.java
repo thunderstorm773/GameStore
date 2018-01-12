@@ -113,13 +113,6 @@ public class User implements UserDetails {
     }
 
     @Transient
-    public boolean isAdmin() {
-        return this.getRoles()
-                .stream()
-                .anyMatch(role -> role.getName().equals("ROLE_ADMIN"));
-    }
-
-    @Transient
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.roles;

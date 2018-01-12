@@ -1,4 +1,4 @@
-window.onload = function () {
+document.onreadystatechange = function () {
 
     function trailer(id) {
         function renderTrailer(response) {

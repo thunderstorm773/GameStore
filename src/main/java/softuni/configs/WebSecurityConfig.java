@@ -29,10 +29,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/games/{\\d+}/buy", "/cart/all",
+                        "/cart/clear").hasAnyRole("USER")
                 .anyRequest().permitAll()
-                .antMatchers("/games/{\\d+}/buy").authenticated()
                 .and()
-                .formLogin().loginPage("/login")
+                .formLogin().loginPage("/users/login")
                 .usernameParameter("email").passwordParameter("password")
                 .and()
                 .logout()

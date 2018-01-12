@@ -5,7 +5,7 @@
                 <div class="text-center"><h1 class="display-3">Login</h1></div>
                 <br/>
 
-                <form th:action="@{/login}" method="post" th:object="${user}">
+                <form th:action="@{/users/login}" method="post" th:object="${user}">
 
                     <div class="form-group row">
                         <label th:for="*{email}" class="sr-only">Email</label>

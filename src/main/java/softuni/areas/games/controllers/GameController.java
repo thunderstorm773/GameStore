@@ -45,6 +45,4 @@ public class GameController {
         String gameInfoViewJson = this.gson.toJson(gameInfoView);
         return gameInfoViewJson;
     }
-
-
 }

@@ -3,6 +3,7 @@ package softuni.areas.games.services;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import softuni.areas.games.entities.Game;
 import softuni.areas.users.entities.User;
 import softuni.areas.users.exceptions.InvalidGameException;
@@ -10,20 +11,26 @@ import softuni.areas.games.models.view.GameDetailsView;
 import softuni.areas.games.models.view.HomePageGameView;
 import softuni.areas.games.repositories.GameRepository;
 import softuni.areas.games.models.view.GameInfoView;
+import softuni.areas.users.exceptions.OwnedGameException;
+import softuni.areas.users.repositories.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @Service
+@Transactional
 public class GameServiceImpl implements GameService {
     private final GameRepository gameRepository;
     private final ModelMapper modelMapper;
+    private final UserRepository userRepository;
 
     @Autowired
-    public GameServiceImpl(GameRepository gameRepository, ModelMapper modelMapper) {
+    public GameServiceImpl(GameRepository gameRepository, ModelMapper modelMapper,
+                           UserRepository userRepository) {
         this.gameRepository = gameRepository;
         this.modelMapper = modelMapper;
+        this.userRepository = userRepository;
     }
 
     private Game getGameById(Long id) {
@@ -88,7 +95,7 @@ public class GameServiceImpl implements GameService {
 
             titles.add(game.getTitle());
         }
-        
+
         return titles;
     }
 

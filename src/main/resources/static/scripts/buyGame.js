@@ -9,8 +9,8 @@ window.onload = function () {
             method: 'post',
             url: url,
             data: csrf,
-            error: function (error) {
-                console.log(error);
+            error: function () {
+                console.log("Game already owned!");
             }
         });
     }
