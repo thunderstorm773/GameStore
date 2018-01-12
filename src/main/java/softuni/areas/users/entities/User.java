@@ -80,6 +80,10 @@ public class User implements UserDetails {
     }
 
     public void addRole(Role role) {
+        if (this.roles == null) {
+            this.roles = new HashSet<>();
+        }
+
         this.roles.add(role);
     }
 
@@ -98,7 +102,10 @@ public class User implements UserDetails {
 
     @Transient
     public void buyGame(Game game) throws OwnedGameException {
-        if(this.games.contains(game)){
+        Long gameId = game.getId();
+        boolean isGameAlreadyOwned = this.games.stream()
+                .anyMatch(g -> g.getId().equals(gameId));
+        if(isGameAlreadyOwned){
             throw new OwnedGameException("The user already has this game");
         }
 

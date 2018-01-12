@@ -68,12 +68,12 @@ public class HomePageGameView {
         return summary;
     }
 
-        public void setSummary(String summary) {
-        this.summary = summary.substring(0, Math.min(300, summary.length())) + "...";;
+    public void setSummary(String summary) {
+        this.summary = summary.substring(0, Math.min(300, summary.length())) + "...";
     }
 
-    public void validate(){
-        if(thumbnail == null || thumbnail.equals("")){
+    public void validate() {
+        if (thumbnail == null || thumbnail.equals("")) {
             this.thumbnail = String.format("https://i.ytimg.com/vi/%s/maxresdefault.jpg", this.getTrailer());
         }
     }

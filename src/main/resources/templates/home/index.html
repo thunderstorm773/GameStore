@@ -19,8 +19,6 @@
     </div>
 </div>
 
-<input type="hidden" id="csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-
 <main>
     <div class="container">
         <div class="row">
@@ -52,7 +50,7 @@
                                 <a class="card-button btn btn-outline-primary"
                                    th:href="@{/games/{id}(id = *{id})}">Details</a>
 
-                                <div class="card-button btn btn-primary btn-buy" th:attr="data-id=*{id}" >Buy</div>
+                                <div sec:authorize="hasAnyRole('USER')" class="card-button btn btn-primary btn-buy" th:attr="data-id=*{id}">Buy</div>
 
                                 <button th:attr="data-id=*{id}" type="button" class="btn btn-secondary btn-trailer"
                                         data-toggle="modal"
@@ -68,7 +66,9 @@
 
             </div>
         </div>
+        <input type="hidden" id="csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
     </div>
 </main>
 
 <script th:src="@{/scripts/home.js}"></script>
+<script th:src="@{/scripts/buyGame.js}"></script>

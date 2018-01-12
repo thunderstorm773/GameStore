@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import softuni.areas.games.entities.Game;
+import softuni.areas.users.entities.User;
 import softuni.areas.users.exceptions.InvalidGameException;
 import softuni.areas.games.models.view.GameDetailsView;
 import softuni.areas.games.models.view.HomePageGameView;
@@ -89,5 +90,11 @@ public class GameServiceImpl implements GameService {
         }
         
         return titles;
+    }
+
+    @Override
+    public void buy(Long gameId, User user) {
+        Game game = this.getGameById(gameId);
+        user.buyGame(game);
     }
 }

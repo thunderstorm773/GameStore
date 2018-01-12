@@ -19,7 +19,8 @@
                 <p><strong>Release Date</strong> - [[${#dates.format(game.releaseDate, 'dd/MMM/yyyy')}]]</p>
 
                 <a class="btn btn-outline-primary" th:href="@{..}">Back</a>
-                <a class="btn btn-primary" href="#">Buy</a>
+                <a sec:authorize="hasAnyRole('USER')" class="btn btn-primary btn-buy"
+                   th:attr="data-id=*{id}" href="#">Buy</a>
 
                 <br/>
                 <br/>
@@ -27,5 +28,7 @@
             </div>
         </div>
     </div>
+    <input type="hidden" id="csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 </main>
 <br/>
+<script th:src="@{/scripts/buyGame.js}"></script>
